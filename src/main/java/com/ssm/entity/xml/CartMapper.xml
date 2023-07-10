@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.CartMapper">
+  <resultMap id="CartMap" type="com.ssm.entity.Cart">
+    <id column="id" property="id"/>
+    <result column="name" property="name" />
+    <result column="img" property="img" />
+    <result column="price" property="price" />
+    <result column="original_price" property="original_price" />
+    <result column="buy_count" property="buy_count" />
+    <result column="uname" property="uname" />
+    <result column="isChecked" property="isChecked"/>
+    <result column="create_time" property="create_time" />
+    <result column="update_time" property="update_time"/>
+  </resultMap>
+  <sql id="CartSql">
+    id, `name`, img, price, original_price, buy_count, isChecked, uname, create_time, update_time
+  </sql>
+
+  <!-- 查询某个用户购物车中所有商品 -->
+  <select id="getCartList" parameterType="java.lang.String" resultMap="CartMap">
+    select
+    <include refid="CartSql"/>
+    from cart
+    where `uname` = #{uname}
+    order by create_time desc
+  </select>
+
+  <!-- 查询某个用户购物车中某个商品 -->
+  <select id="getCartInfoByName" parameterType="java.lang.String" resultMap="CartMap">
+    select
+    <include refid="CartSql"/>
+    from cart
+    where `name` = #{name}
+    and `uname` = #{uname}
+  </select>
+
+  <!-- 添加商品到购物车 -->
+  <insert id="addToCart" parameterType="com.ssm.entity.Cart">
+    insert into cart (`name`, img, price, original_price, buy_count, isChecked, uname, create_time, update_time)
+    values (#{name}, #{img}, #{price}, #{original_price}, #{buy_count}, 1, #{uname}, #{create_time}, #{update_time})
+  </insert>
+
+  <!-- 从购物车中删除商品 -->
+  <delete id="deleteToCart" parameterType="java.lang.String">
+    delete from cart
+    where `name` = #{name}
+    and `uname` = #{uname}
+  </delete>
+
+  <!-- 更新购物车数据 -->
+  <update id="updateCart">
+    update cart
+    set `buy_count` = #{buy_count}, update_time = #{update_time}, isChecked = #{isChecked}
+    where `name` = #{name}
+    and `uname` = #{uname}
+  </update>
+</mapper>

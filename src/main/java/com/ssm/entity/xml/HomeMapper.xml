@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.HomeMapper">
+  <resultMap id="HomeMap" type="com.ssm.entity.Home">
+    <id column="id" property="id"/>
+    <result column="style" property="style"/>
+    <result column="name" property="name"/>
+    <result column="desc" property="desc"/>
+    <result column="img" property="img"/>
+    <result column="create_time" property="create_time"/>
+    <result column="update_time" property="update_time"/>
+  </resultMap>
+  <resultMap id="BannerMap" type="com.ssm.entity.Banner">
+    <id column="id" property="id"/>
+    <result column="img" property="img"/>
+    <result column="isShow" property="isShow"/>
+    <result column="isMobile" property="isMobile"/>
+    <result column="create_time" property="create_time"/>
+    <result column="update_time" property="update_time"/>
+  </resultMap>
+  <resultMap id="HomeGoodsMap" type="com.ssm.entity.Goods">
+    <id column="id" property="id"/>
+    <result column="type" property="type"/>
+    <result column="img" property="img"/>
+    <result column="name" property="name"/>
+    <result column="price" property="price"/>
+    <result column="sale_count" property="sale_count"/>
+    <result column="describe" property="describe"/>
+    <result column="slogan" property="slogan"/>
+  </resultMap>
+  <resultMap id="CategoryMap" type="com.ssm.entity.Home">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="style" property="style"/>
+    <result column="m_img" property="m_img"/>
+    <collection property="categories" ofType="com.ssm.entity.Category">
+      <id column="category_id" property="id"/>
+      <result column="category_name" property="name"/>
+      <result column="category_type" property="type"/>
+      <collection property="tags" ofType="com.ssm.entity.Tag">
+        <id column="tag_id" property="id"/>
+        <result column="tag_title" property="title"/>
+        <result column="tag_icon" property="icon"/>
+        <result column="tag_type" property="type"/>
+        <result column="tag_style" property="style"/>
+      </collection>
+    </collection>
+  </resultMap>
+
+  <sql id="HomeSql">
+    id, `style`, `name`, `desc`, `img`, m_img, `create_time`, `update_time`
+  </sql>
+  <sql id="BannerSql">
+    id, `img`, isShow, isMobile, `create_time`, `update_time`
+  </sql>
+  <sql id="HomeGoodsSql">
+    id, `type`, img, `name`, price, sale_count, `describe`, `slogan`
+  </sql>
+  <sql id="CategorySql">
+    h.id as id, h.name as name, h.style as style, h.m_img as m_img,
+    c.id as category_id, c.name as category_name, c.type as category_type,
+    t.id as tag_id, t.title as tag_title, t.icon as tag_icon, t.type as tag_type, t.style as tag_style
+  </sql>
+
+  <select id="getHomeInfo" resultMap="HomeMap">
+    select
+    <include refid="HomeSql"/>
+    from `home`
+    order by id
+  </select>
+  <select id="getHomeInfoById" resultMap="HomeMap">
+    select
+    <include refid="HomeSql"/>
+    from `home`
+    where id = #{id}
+  </select>
+
+  <select id="getBannerInfo" resultMap="BannerMap">
+    select
+    <include refid="BannerSql"/>
+    from `banner`
+    where isMobile = 0
+    order by id
+  </select>
+  <select id="getM_BannerInfo" resultMap="BannerMap">
+    select
+    <include refid="BannerSql"/>
+    from `banner`
+    where isMobile = 1
+    order by id
+  </select>
+  <select id="getBannerInfoById" resultMap="BannerMap">
+    select
+    <include refid="BannerSql"/>
+    from `banner`
+    where id = #{id}
+  </select>
+
+  <select id="getCategory" resultMap="CategoryMap">
+    select <include refid="CategorySql"/>
+    from flowerproject.home h, flowerproject.home_category c, flowerproject.category_tag t
+    where h.style = c.type and c.name = t.type
+  </select>
+
+  <select id="getHomeGoodsInfo" resultMap="HomeGoodsMap">
+    select
+    <include refid="HomeGoodsSql"/>
+    from `goods`
+    where `type` = #{type}
+    limit 8
+  </select>
+
+  <select id="getHomeStyle" resultType="java.lang.String">
+    select `style`
+    from `home`
+  </select>
+
+  <select id="totalHome" resultType="java.lang.Integer">
+    select count(*)
+    from `home`
+  </select>
+  <insert id="addHomeInfo" parameterType="com.ssm.entity.Home">
+    insert into `home`
+    (`style`, `name`, `desc`, `img`, m_img ,`create_time`, `update_time`)
+    values (#{style}, #{name}, #{desc}, #{img}, #{m_img}, #{create_time}, #{update_time})
+  </insert>
+  <delete id="deleteHomeInfoById" parameterType="java.lang.Integer">
+    delete from `home`
+    where id = #{id}
+  </delete>
+  <update id="updateHomeInfo" parameterType="com.ssm.entity.Home">
+    update `home`
+    <if test="id != 0">
+      set `style` = #{style}, `name` = #{name}, `desc` = #{desc}, img = #{img}, m_img = #{m_img}, update_time = #{update_time}
+    </if>
+    where id = #{id}
+  </update>
+
+  <select id="totalBanner" resultType="java.lang.Integer">
+    select count(*)
+    from `banner`
+  </select>
+  <insert id="addBannerInfo" parameterType="com.ssm.entity.Banner">
+    insert into `banner`
+    (`img`, isShow, isMobile, `create_time`, `update_time`)
+    values (#{img}, #{isShow}, #{isMobile}, #{create_time}, #{update_time})
+  </insert>
+  <delete id="deleteBannerInfoById" parameterType="java.lang.Integer">
+    delete from `banner`
+    where id = #{id}
+  </delete>
+  <update id="updateBannerInfo" parameterType="com.ssm.entity.Banner">
+    update `banner`
+    <if test="id != 0">
+      set img = #{img}, isShow = #{isShow}, update_time = #{update_time}
+    </if>
+    where id = #{id}
+  </update>
+</mapper>

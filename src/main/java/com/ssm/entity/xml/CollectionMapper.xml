@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.CollectionMapper">
+  <resultMap id="CollectionMap" type="com.ssm.entity.Collections">
+    <id column="id" property="id"/>
+    <result column="g_id" property="g_id"/>
+    <result column="create_time" property="create_time"/>
+    <collection property="g_info" ofType="com.ssm.entity.Goods">
+      <id column="g_id" property="id"/>
+      <result column="g_name" property="name"/>
+      <result column="g_describe" property="describe"/>
+      <result column="g_img" property="img"/>
+      <result column="g_price" property="price"/>
+      <result column="g_original_price" property="original_price"/>
+    </collection>
+  </resultMap>
+
+  <sql id="CollectionSql">
+    c.id, c.g_id, c.create_time, g.id as g_id, g.name as g_name,
+    g.describe as g_describe, g.img as g_img, g.price as g_price, g.original_price as g_original_price
+  </sql>
+
+  <select id="getCollectionByUname" resultMap="CollectionMap">
+    select <include refid="CollectionSql"/>
+    from collection c, goods g
+    where c.g_id = g.id and u_name = #{uname}
+  </select>
+
+  <select id="getCollectionIdByUname" resultType="java.lang.Integer">
+    select g_id from collection where u_name = #{uname}
+  </select>
+
+  <select id="getIdByGidAndUname" resultType="java.lang.Integer">
+    select id from collection where g_id = #{g_id} and u_name = #{u_name}
+  </select>
+
+  <insert id="addCollection">
+    insert into collection (g_id, u_name, create_time)
+    values (#{g_id}, #{u_name}, #{create_time})
+  </insert>
+
+  <delete id="deleteCollection">
+    delete from collection
+    where g_id = #{g_id} and u_name = #{u_name}
+  </delete>
+</mapper>

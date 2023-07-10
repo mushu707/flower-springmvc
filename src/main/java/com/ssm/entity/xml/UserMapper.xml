@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.ssm.entity.User">
+    <id column="name" property="name" />
+    <result column="password" property="password" />
+    <result column="identity" property="identity" />
+    <result column="sex" property="sex"/>
+    <result column="phone" property="phone"/>
+    <result column="email" property="email"/>
+    <result column="birth" property="birth"/>
+    <result column="imageUrl" property="imageUrl" />
+    <result column="token" property="token"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    `name`, `password`, `identity`, sex, phone, email, birth, `imageUrl`, `token`
+  </sql>
+
+  <select id="getUserInfoByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from `user`
+    where `name` = #{name}
+  </select>
+  <select id="getUserInfoByToken" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from `user`
+    where `token` = #{token}
+  </select>
+  <select id="getCount" parameterType="java.lang.String" resultType="java.util.Map">
+    select
+    cart.cartCount, collection.collectionCount, history.historyCount
+    from (select count(*) as cartCount from cart where uname = #{name}) cart,
+         (select count(*) as collectionCount from collection where u_name = #{name}) collection,
+         (select count(*) as historyCount from history where u_name = #{name}) history
+  </select>
+
+  <insert id="addUser" parameterType="com.ssm.entity.User">
+    insert into `user`(`name`, password, `identity`, imageUrl, token)
+    values (#{name}, #{password}, #{identity}, #{imageUrl}, #{token})
+  </insert>
+  <update id="updateUserInfo">
+    update `user`
+    set
+    <if test="token != null and token != ''">
+      `name` = #{user.name}, sex = #{user.sex}, phone = #{user.phone},
+      email = #{user.email}
+    </if>
+    <if test="user.birth != null">
+      , birth = #{user.birth}
+    </if>
+    <if test="user.imageUrl != null">
+      , imageUrl = #{user.imageUrl}
+    </if>
+    where `token` = #{token}
+  </update>
+  <update id="updateUserPassword">
+    update `user`
+    set password = #{password}
+    where token = #{token}
+  </update>
+  <update id="updateTokenByName">
+    update `user`
+    set token = #{token}
+    where `name` = #{name}
+  </update>
+</mapper>

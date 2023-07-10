@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.HistoryMapper">
+  <resultMap id="HistoryMap" type="com.ssm.entity.History">
+    <id column="id" property="id"/>
+    <result column="g_id" property="g_id"/>
+    <result column="create_time" property="create_time"/>
+    <collection property="g_info" ofType="com.ssm.entity.Goods">
+      <id column="g_id" property="id"/>
+      <result column="g_name" property="name"/>
+      <result column="g_material" property="material"/>
+      <result column="g_img" property="img"/>
+      <result column="g_price" property="price"/>
+    </collection>
+  </resultMap>
+
+  <sql id="HistorySql">
+    h.id, h.g_id, h.create_time, g.id as g_id, g.name as g_name,
+    g.material as g_material, g.img as g_img, g.price as g_price
+  </sql>
+
+  <select id="getTotalHistoryByUname" resultMap="HistoryMap">
+    select <include refid="HistorySql"/>
+    from history h, goods g
+    where h.g_id = g.id and u_name = #{u_name}
+    order by create_time desc
+  </select>
+  <select id="getIdByGidAndUname" resultType="java.lang.Integer">
+    select id from history
+    where g_id = #{g_id} and u_name = #{u_name}
+  </select>
+
+  <insert id="addHistory">
+    insert into history (g_id, u_name, create_time)
+    values (#{g_id}, #{u_name}, #{create_time})
+  </insert>
+
+  <delete id="deleteHistoryByGidAndUname">
+    delete from history
+    where g_id = #{g_id} and u_name = #{u_name}
+  </delete>
+  <delete id="deleteHistoryByList" parameterType="java.lang.Integer">
+    delete from history
+    where g_id in
+    <foreach collection="list" item="g_id" index="index" open="(" separator="," close=")">
+      #{g_id}
+    </foreach>
+    and u_name = #{u_name}
+  </delete>
+</mapper>

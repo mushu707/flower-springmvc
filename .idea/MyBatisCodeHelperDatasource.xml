@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MyBatisCodeHelperDatasource">
+    <option name="projectProfile">
+      <ProjectProfile>
+        <option name="generateService" value="true" />
+        <option name="generateServiceInterface" value="true" />
+        <option name="insertSelectiveMethodEnabled" value="false" />
+        <option name="javaMapperPackage" value="com.ssm.mapper" />
+        <option name="javaMapperPath" value="$PROJECT_DIR$/src/main/java" />
+        <option name="javaModelPackage" value="com.ssm.entity" />
+        <option name="javaModelPath" value="$PROJECT_DIR$/src/main/java" />
+        <option name="lastDatabaseCrudChooseModuleName" value="ProjectEnd" />
+        <option name="moduleNameToPackageAndPathMap">
+          <map>
+            <entry key="ProjectEnd">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="com.ssm.mapper" />
+                  <option name="javaMapperPath" value="$PROJECT_DIR$/src/main/java" />
+                  <option name="javaModelPacakge" value="com.ssm.entity" />
+                  <option name="javaModelPath" value="$PROJECT_DIR$/src/main/java" />
+                  <option name="javaServiceInterfacePackage" value="com.ssm.service" />
+                  <option name="javaServiceInterfacePath" value="$PROJECT_DIR$/src/main/java" />
+                  <option name="javaServicePackage" value="com.ssm.service.impl" />
+                  <option name="javaServicePath" value="$PROJECT_DIR$/src/main/java" />
+                  <option name="xmlPackage" value="com.ssm.entity.xml" />
+                  <option name="xmlPath" value="D:\IdeaWork\ProjectEnd\src\main\java" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="noJdbcType" value="true" />
+        <option name="selectByPrimaryKeyEnabled" value="false" />
+        <option name="tableGenerateConfigs">
+          <map>
+            <entry key="flowerproject:card">
+              <value>
+                <TableGenerateConfig>
+                  <option name="insertMethodEnabled" value="false" />
+                  <option name="javaModelName" value="Card" />
+                  <option name="moduleName" value="ProjectEnd" />
+                  <option name="selectByPrimaryKeyEnabled" value="false" />
+                  <option name="updateByPrimaryKeySelectiveEnabled" value="false" />
+                  <option name="updateByPrimaykeyEnabled" value="false" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="flowerproject:cart">
+              <value>
+                <TableGenerateConfig>
+                  <option name="insertSelectiveMethodEnabled" value="false" />
+                  <option name="javaModelName" value="Cart" />
+                  <option name="moduleName" value="ProjectEnd" />
+                  <option name="selectByPrimaryKeyEnabled" value="false" />
+                  <option name="updateByPrimaryKeySelectiveEnabled" value="false" />
+                  <option name="updateByPrimaykeyEnabled" value="false" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="flowerproject:crefamily">
+              <value>
+                <TableGenerateConfig>
+                  <option name="deleteByPrimayKeyEnabled" value="false" />
+                  <option name="insertMethodEnabled" value="false" />
+                  <option name="insertSelectiveMethodEnabled" value="false" />
+                  <option name="javaModelName" value="Crefamily" />
+                  <option name="moduleName" value="ProjectEnd" />
+                  <option name="updateByPrimaryKeySelectiveEnabled" value="false" />
+                  <option name="updateByPrimaykeyEnabled" value="false" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="flowerproject:familygoods">
+              <value>
+                <TableGenerateConfig>
+                  <option name="deleteByPrimayKeyEnabled" value="false" />
+                  <option name="insertMethodEnabled" value="false" />
+                  <option name="insertSelectiveMethodEnabled" value="false" />
+                  <option name="javaModelName" value="Familygoods" />
+                  <option name="moduleName" value="ProjectEnd" />
+                  <option name="updateByPrimaryKeySelectiveEnabled" value="false" />
+                  <option name="updateByPrimaykeyEnabled" value="false" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="flowerproject:forevergoods">
+              <value>
+                <TableGenerateConfig>
+                  <option name="deleteByPrimayKeyEnabled" value="false" />
+                  <option name="insertMethodEnabled" value="false" />
+                  <option name="insertSelectiveMethodEnabled" value="false" />
+                  <option name="javaModelName" value="Forevergoods" />
+                  <option name="moduleName" value="ProjectEnd" />
+                  <option name="updateByPrimaryKeySelectiveEnabled" value="false" />
+                  <option name="updateByPrimaykeyEnabled" value="false" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="flowerproject:goods">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="" />
+                  <option name="insertSelectiveMethodEnabled" value="false" />
+                  <option name="javaModelName" value="GoodsT" />
+                  <option name="moduleName" value="ProjectEnd" />
+                  <option name="selectByPrimaryKeyEnabled" value="false" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="updateByPrimaryKeySelectiveEnabled" value="false" />
+                  <option name="updateByPrimaykeyEnabled" value="false" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="flowerproject:lovegoods">
+              <value>
+                <TableGenerateConfig>
+                  <option name="deleteByPrimayKeyEnabled" value="false" />
+                  <option name="insertMethodEnabled" value="false" />
+                  <option name="insertSelectiveMethodEnabled" value="false" />
+                  <option name="javaModelName" value="Lovegoods" />
+                  <option name="moduleName" value="ProjectEnd" />
+                  <option name="updateByPrimaryKeySelectiveEnabled" value="false" />
+                  <option name="updateByPrimaykeyEnabled" value="false" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="flowerproject:user">
+              <value>
+                <TableGenerateConfig>
+                  <option name="deleteByPrimayKeyEnabled" value="false" />
+                  <option name="insertMethodEnabled" value="false" />
+                  <option name="insertSelectiveMethodEnabled" value="false" />
+                  <option name="javaModelName" value="User" />
+                  <option name="moduleName" value="ProjectEnd" />
+                  <option name="updateByPrimaryKeySelectiveEnabled" value="false" />
+                  <option name="updateByPrimaykeyEnabled" value="false" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="test:user">
+              <value>
+                <TableGenerateConfig>
+                  <option name="javaModelName" value="User" />
+                  <option name="moduleName" value="ProjectEnd" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="updateByPrimaryKeySelectiveEnabled" value="false" />
+        <option name="updateByPrimaykeyEnabled" value="false" />
+        <option name="xmlMapperPackage" value="com.ssm.entity.xml" />
+        <option name="xmlMapperPath" value="D:\IdeaWork\ProjectEnd\src\main\java" />
+      </ProjectProfile>
+    </option>
+  </component>
+</project>
